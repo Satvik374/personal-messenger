@@ -11,8 +11,11 @@ async function main(): Promise<void> {
   const schemaVersion = await migrate(db)
   const repo = new Repo(db)
 
-  // Seed the invitation friends will use. Existing (even consumed) invites are untouched.
-  await repo.ensureInvite(env.bootstrapInvite, null)
+  // Seed the invitations friends will use. Each admits one person, and existing
+  // (even consumed) invites are left untouched.
+  for (const code of env.bootstrapInvites) {
+    await repo.ensureInvite(code, null)
+  }
 
   const push = createPushService(env.fcmServiceAccount)
   const { app } = await buildServer({ env, repo, push, logger: true })

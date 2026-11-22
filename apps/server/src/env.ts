@@ -9,6 +9,8 @@ export interface Env {
   jwtSecret: string
   fcmServiceAccount: string
   bootstrapInvite: string
+  /** BOOTSTRAP_INVITE plus any extra codes from BOOTSTRAP_INVITES, all seeded at startup. */
+  bootstrapInvites: string[]
   accessTokenTtlSeconds: number
   refreshTokenTtlSeconds: number
 }
@@ -34,6 +36,14 @@ export function loadEnv(source: NodeJS.ProcessEnv = process.env): Env {
   const tursoToken = source.TURSO_AUTH_TOKEN ?? ''
   if (isProduction && tursoUrl && !tursoToken) throw missing('TURSO_AUTH_TOKEN')
 
+  // Each invite admits one person, so the primary code gets a numbered companion
+  // by default; BOOTSTRAP_INVITES is a comma-separated list to add more.
+  const bootstrapInvite = source.BOOTSTRAP_INVITE ?? 'FRIENDS2026'
+  const extraInvites = (source.BOOTSTRAP_INVITES ?? `${bootstrapInvite}-2`).split(',')
+  const bootstrapInvites = [...new Set(
+    [bootstrapInvite, ...extraInvites].map((code) => code.trim()).filter(Boolean),
+  )]
+
   return {
     port: Number(source.PORT ?? 8787),
     host: source.HOST ?? '0.0.0.0',
@@ -42,7 +52,8 @@ export function loadEnv(source: NodeJS.ProcessEnv = process.env): Env {
     tursoToken,
     jwtSecret,
     fcmServiceAccount: source.FCM_SERVICE_ACCOUNT_JSON ?? '',
-    bootstrapInvite: source.BOOTSTRAP_INVITE ?? 'FRIENDS2026',
+    bootstrapInvite,
+    bootstrapInvites,
     accessTokenTtlSeconds: 15 * 60,
     refreshTokenTtlSeconds: 30 * 24 * 60 * 60,
   }

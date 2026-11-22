@@ -23,3 +23,6 @@ services:
       # Code a new account needs to register. Change it here or in the Render dashboard.
       - key: BOOTSTRAP_INVITE
         value: FRIENDS2026
+      # Extra one-time codes, comma separated. Each admits one person.
+      - key: BOOTSTRAP_INVITES
+        value: FRIENDS2026-2
