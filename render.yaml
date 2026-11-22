@@ -1,0 +1,25 @@
+# Render Blueprint: the messenger API as one free web service.
+# Build runs from the repository root so packages/shared is available to the server.
+# Data lives in Turso (free tier), so no attached disk is needed.
+services:
+  - type: web
+    name: personal-messenger
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./apps/server/Dockerfile
+    dockerContext: .
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      # Paste these from the Turso dashboard when Render asks for them.
+      - key: TURSO_DATABASE_URL
+        sync: false
+      - key: TURSO_AUTH_TOKEN
+        sync: false
+      # Code a new account needs to register. Change it here or in the Render dashboard.
+      - key: BOOTSTRAP_INVITE
+        value: FRIENDS2026

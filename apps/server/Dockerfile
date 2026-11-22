@@ -2,7 +2,7 @@
 #   docker build -f apps/server/Dockerfile -t personal-messenger .
 # The build context must be the repo root so packages/shared can be copied in.
 
-FROM node:22-alpine
+FROM node:24-slim
 
 WORKDIR /app
 
