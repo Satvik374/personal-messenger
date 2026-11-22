@@ -6,7 +6,7 @@ services:
     name: personal-messenger
     runtime: docker
     plan: free
-    region: oregon
+    region: singapore
     dockerfilePath: ./apps/server/Dockerfile
     dockerContext: .
     healthCheckPath: /healthz
