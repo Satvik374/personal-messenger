@@ -1,0 +1,28 @@
+{
+  "name": "personal-messenger",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Private glass-styled messenger: Node server, Electron desktop app and Android APK.",
+  "workspaces": [
+    "packages/shared",
+    "packages/ui",
+    "apps/desktop",
+    "apps/mobile"
+  ],
+  "scripts": {
+    "build:shared": "npm run build -w @pm/shared",
+    "build:ui": "npm run build:shared && npm run build -w @pm/ui",
+    "server:install": "npm --prefix apps/server install",
+    "server:dev": "npm --prefix apps/server run dev",
+    "server:build": "npm --prefix apps/server run build",
+    "server:start": "npm --prefix apps/server run start",
+    "server:test": "npm --prefix apps/server test",
+    "dev:ui": "npm run build:shared && npm run dev -w @pm/ui",
+    "dev:desktop": "npm run dev -w @pm/desktop",
+    "dist:desktop": "npm run dist -w @pm/desktop",
+    "apk": "npm run apk -w @pm/mobile"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

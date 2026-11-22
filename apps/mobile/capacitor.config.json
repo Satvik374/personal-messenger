@@ -1,0 +1,12 @@
+{
+  "appId": "app.personalmessenger.mobile",
+  "appName": "Personal Messenger",
+  "webDir": "www",
+  "backgroundColor": "#07090f",
+  "android": {
+    "allowMixedContent": true
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}

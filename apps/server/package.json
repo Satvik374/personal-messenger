@@ -1,0 +1,30 @@
+{
+  "name": "@pm/server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "npm run build:shared && tsx watch src/index.ts",
+    "build:shared": "tsc -p ../../packages/shared/tsconfig.json",
+    "build": "npm run build:shared && tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "typecheck": "npm run build"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.4.0",
+    "@libsql/client": "^0.18.0",
+    "@pm/shared": "file:../../packages/shared",
+    "fastify": "^5.12.8",
+    "ws": "^8.22.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/ws": "^8.18.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}

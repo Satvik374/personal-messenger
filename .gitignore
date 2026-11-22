@@ -1,0 +1,31 @@
+node_modules/
+dist/
+dist-electron/
+release/
+out/
+*.log
+.env
+.env.local
+*.db
+*.db-journal
+.DS_Store
+Thumbs.db
+
+# Electron / build artefacts
+apps/desktop/release/
+packages/ui/dist/
+apps/mobile/www/
+apps/mobile/android/app/build/
+apps/mobile/android/.gradle/
+apps/mobile/.gradle-user-home/
+apps/mobile/android/local.properties
+apps/mobile/android/app/google-services.json
+*.keystore
+*.jks
+
+# Local runtime data (accounts, messages, WAL files)
+apps/server/data/
+
+# Temporary deploy scaffolding
+.deploy-stage/
+.deploy-payload/
